@@ -15,17 +15,17 @@ from django.views.generic import ListView
 #     return render(request,'blog/index.html',context={'post_list':post_list})
 
 
-def detail(request, pk):
-    post = get_object_or_404(Post,pk=pk)
-    post.increase_views()
-    post.body = markdown.markdown(post.body,
-                                    extensions=['markdown.extensions.extra',
-                                                'markdown.extensions.codehilite',
-                                                'markdown.extensions.toc',])
-    form = CommentForm()
-    comment_list = post.comment_set.all()     
-    context = {'post':post,'form':form,'comment_list':comment_list}                                       
-    return render(request, 'blog/detail.html', context=context)
+# def detail(request, pk):
+#     post = get_object_or_404(Post,pk=pk)
+#     post.increase_views()
+#     post.body = markdown.markdown(post.body,
+#                                     extensions=['markdown.extensions.extra',
+#                                                 'markdown.extensions.codehilite',
+#                                                 'markdown.extensions.toc',])
+#     form = CommentForm()
+#     comment_list = post.comment_set.all()     
+#     context = {'post':post,'form':form,'comment_list':comment_list}                                       
+#     return render(request, 'blog/detail.html', context=context)
 
 
 # def archives(request, year, month):
@@ -55,19 +55,19 @@ class ArchivesView(IndexView):
         month = self.kwargs.get('month')
         return super(ArchivesView, self).get_queryset().filter(created_time__year=year,created_time__month=month)
 
-class postDetailView(ListView):
+class PostDetailView(ListView):
     model = Post
     template_name = 'blog/detail.html'
     context_object_name = 'post'
 
     def get(self, request, *args, **kwargs):
-        response = super(postDetailView, self).get(request, *args, **kwargs)
+        response = super(PostDetailView, self).get(request, *args, **kwargs)
         self.object.increase_views()
         return response
     
     def get_object(self, queryset=None):
         
-        post = super(postDetailView, self).get_object(queryset=None)
+        post = super(PostDetailView, self).get_object(queryset=None)
         post.body = markdown.markdown(post.body,
                                         extensions=[
                                             'markdown.extensions.extra',
@@ -77,7 +77,7 @@ class postDetailView(ListView):
         return post
     
     def get_context_data(self, **kwargs):
-        context = super(postDetailView, self).get_context_data(**kwargs)
+        context = super(PostDetailView, self).get_context_data(**kwargs)
         form = CommentForm()
         comment_list = self.object.comment_set.all()
         context.update({
