@@ -55,7 +55,7 @@ class ArchivesView(IndexView):
         month = self.kwargs.get('month')
         return super(ArchivesView, self).get_queryset().filter(created_time__year=year,created_time__month=month)
 
-class PostDetailView(ListView):
+class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
     context_object_name = 'post'
