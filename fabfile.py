@@ -22,4 +22,4 @@ def deploy():
         /home/{}/.install/develop/install/anaconda2/envs/python25/bin/python manage.py migrate
         '''.format(source_folder,user,user,user, user))
     sudo('systemctl restart nginx')
-    run('gunicorn --bind unix:/tmp/myblog.socket blogproejct.wsgi:application &')
+    run('/home/{}/.install/develop/install/anaconda2/envs/python25/bin/gunicorn --bind unix:/tmp/myblog.socket blogproejct.wsgi:application'.format(user))
