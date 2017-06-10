@@ -24,7 +24,6 @@ def deploy():
         '''.format(source_folder,user,user,user, user))
     sudo('systemctl restart nginx')
     run('''
-    respawn &&
     setuid liuse &&
     cd {} &&
     exec /home/{}/.install/develop/install/anaconda2/envs/python25/bin/gunicorn --bind unix:/tmp/myblog.socket blogproject.wsgi:application
