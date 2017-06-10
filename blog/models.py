@@ -66,15 +66,15 @@ class Post(models.Model):
         ordering = ['-created_time']
 
         
-    def increase_views(self, *args, **kwargs):
+    def increase_views(self):
         self.views += 1
         self.save(update_fields=['views'])
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.excerpt:
             md = markdown.Markdown(extensions=[
                 'markdown.extensions.extra',
-                'markdown.extensions.codehilite'
+                'markdown.extensions.codehilite',
             ])
 
             self.excerpt = strip_tags(md.convert(self.body))[:54]
