@@ -72,7 +72,7 @@ class Post(models.Model):
 
     def save(self):
         if not self.excerpt:
-            md = markdown.markdown(extensions=[
+            md = markdown.Markdown(extensions=[
                 'markdown.extensions.extra',
                 'markdown.extensions.codehilite'
             ])
