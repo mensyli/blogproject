@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from .models import Post,Category
 import markdown
 from comments.forms import CommentForm
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView
 # Create your views here.
 
 # def index(request):
