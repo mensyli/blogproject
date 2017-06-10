@@ -47,7 +47,7 @@ class IndexView(ListView):
 class CategoryView(IndexView):
     def get_queryset(self):
         cate = get_object_or_404(Category,pk=self.kwargs.get('pk'))
-        return super(CategoryView, self).get_queryset().filter(cate)
+        return super(CategoryView, self).get_queryset().filter(category=cate)
 
 class ArchivesView(IndexView):
     def get_queryset(self):
