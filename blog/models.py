@@ -1,5 +1,7 @@
+import markdown
 from django.db import models
 from django.urls import reverse
+from django.utils.html import strip_tags
 from django.contrib.auth.models import User
 from django.utils.six import python_2_unicode_compatible
 # Create your models here.
@@ -64,8 +66,17 @@ class Post(models.Model):
         ordering = ['-created_time']
 
         
-    def increase_views(self):
+    def increase_views(self, *args, **kwargs):
         self.views += 1
         self.save(update_fields=['views'])
 
+    def save(self):
+        if not self.excerpt:
+            md = markdown.markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite'
+            ])
+
+            self.excerpt = strip_tags(md.convert(self.body))[:54]
+        super(Post,self).save(*args, **kwargs)
     
