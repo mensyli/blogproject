@@ -50,6 +50,9 @@ class Post(models.Model):
     # 作者
     author = models.ForeignKey(User)
 
+    # 阅读量
+    views = models.PositiveIntegerField(default=0)
+
     @python_2_unicode_compatible
     def __str__(self):
         return self.title
@@ -61,5 +64,8 @@ class Post(models.Model):
         ordering = ['-created_time']
 
         
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views'])
 
     
