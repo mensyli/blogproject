@@ -30,7 +30,7 @@ PyMySQL==0.7.9
 pyOpenSSL==17.0.0
 pyparsing==2.1.4
 pytz==2017.2
-pywin32==220
+# pywin32==220
 queuelib==1.4.2
 requests==2.14.2
 Scrapy==1.3.3
