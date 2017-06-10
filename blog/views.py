@@ -76,7 +76,7 @@ class postDetailView(ListView):
                                         ])
         return post
     
-    def def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(postDetailView, self).get_context_data(**kwargs)
         form = CommentForm()
         comment_list = self.object.comment_set.all()
